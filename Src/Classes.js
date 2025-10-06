@@ -5,11 +5,11 @@ class Ship {
     };
     
     hit() {
-        return this.hits++
+        this.hits++
     };
 
     isSunk() {
-        if (this.hit >= length) {
+        if (this.hits >= length) {
             return true
         } else {
             return false
@@ -19,44 +19,44 @@ class Ship {
 
 class Gameboard {
     constructor(board = null, missedShots, ships) {
-        this.board = new Map() || board
-        this.missedShots = new Map() || missedShots;
-        this.ships = new Map() || ships;
+        this.board = new Map();
+        this.missedShots = new Set();
+        this.ships = []
     }
 
     
     placeShip(ship = new Ship(), startCoord = new Map(), direction) {
-        const gB = new Gameboard();
-        
         // const ship = new Ship(); should i use this one or the parameter one?
         
-        for (const cell of ship.length && direction) {
-            startCoord.set([x,y])
+        for (let startCoord[i] = 0;  ship.length - 1) {
+            if (direction == 'horizontal') {
+                startCoord = (x + 1, y)
+            } else {
+               startCoord = (x, y + 1) 
+            }
         }
-        this.ships.push() 
+        this.board.set(startCoord, ship) 
 
         // placeShip function have no idea if im doing it right or not. too much instantiation?
     }
 
 
     receiveAttack([x,y]) {
-        const gB = new Gameboard();
-        const ship = new Ship();
-
-        if (gB.board >= (ship.length)) {
+        
+        if (this.board !== this.missedShots) {
+            this.ships[i]
             ship.hit();
         } else {
-            this.missedShots.set([x,y])
+            this.missedShots.add([x,y])
         }
     }
 
     allShipSunk() {
-        const gB = new Gameboard();
-        const ship = new Ship();
-
-        if (gB.ships === ship.isSunk) {
-            return true
-        }
+        
+        this.ships.forEach((ship) => {
+            ship.isSunk();
+            return true;
+        })
     }
 }
 
@@ -65,11 +65,13 @@ class Player {
         this.name = name;
         this.isComputer = isComputer;
         this.gameboard = gameboard;
+
+        // im assuming have to inherit or make composition of gamboard to player and isComputer? dont know how though
     }
 
    
-    attack(oppBoard) {
-        oppBoard = new Gameboard()
+    attack(oppBoard, receiveAttack) {
+        receiveAttack = Gameboard.receiveAttack
         oppBoard.receiveAttack([x,y])
     }
      
