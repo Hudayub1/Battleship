@@ -1,34 +1,76 @@
 class Ship {
-
-    shipType = {
-      "Aircraft Carrier" : arr.length = 5,
-      "Battleship" : arr.length = 4,
-      "Cruiser" : arr.length = 3,
-      "Submarine" : arr.length = 3,
-      "Destroyer" : arr.length = 2,
-    }
-
-    hit(i) {
-        return i++
+    constructor(length, hits = 0) { 
+        this.length = length;
+        this.hits = hits;
+    };
+    
+    hit() {
+        return this.hits++
     };
 
     isSunk() {
-        if (this.hit(i) === this.shipType) {
-            return "ship has sunked"
+        if (this.hit >= length) {
+            return true
         } else {
-            return "not sunk yet"
+            return false
         }
     };
 }
 
 class Gameboard {
-    receiveAttack() {
+    constructor(board = null, missedShots, ships) {
+        this.board = new Map() || board
+        this.missedShots = new Map() || missedShots;
+        this.ships = new Map() || ships;
+    }
 
+    
+    placeShip(ship = new Ship(), startCoord = new Map(), direction) {
+        const gB = new Gameboard();
+        
+        // const ship = new Ship(); should i use this one or the parameter one?
+        
+        for (const cell of ship.length && direction) {
+            startCoord.set([x,y])
+        }
+        this.ships.push() 
+
+        // placeShip function have no idea if im doing it right or not. too much instantiation?
+    }
+
+
+    receiveAttack([x,y]) {
+        const gB = new Gameboard();
+        const ship = new Ship();
+
+        if (gB.board >= (ship.length)) {
+            ship.hit();
+        } else {
+            this.missedShots.set([x,y])
+        }
+    }
+
+    allShipSunk() {
+        const gB = new Gameboard();
+        const ship = new Ship();
+
+        if (gB.ships === ship.isSunk) {
+            return true
+        }
     }
 }
 
 class Player {
-    constructor() {
-
+    constructor(name, isComputer, gameboard) {
+        this.name = name;
+        this.isComputer = isComputer;
+        this.gameboard = gameboard;
     }
+
+   
+    attack(oppBoard) {
+        oppBoard = new Gameboard()
+        oppBoard.receiveAttack([x,y])
+    }
+     
 }
