@@ -9,7 +9,7 @@ class Ship {
     };
 
     isSunk() {
-        if (this.hits >= length) {
+        if (this.hits >= this.length) {
             return true
         } else {
             return false
@@ -18,7 +18,7 @@ class Ship {
 }
 
 class Gameboard {
-    constructor(board = null, missedShots, ships) {
+    constructor() {
         this.board = new Map();
         this.missedShots = new Set();
         this.ships = []
@@ -28,14 +28,19 @@ class Gameboard {
     placeShip(ship = new Ship(), startCoord = new Map(), direction) {
         // const ship = new Ship(); should i use this one or the parameter one?
         
-        for (let startCoord[i] = 0;  ship.length - 1) {
+        let [x, y] = startCoord
+
+        for (let i = 0;  i < ship.length; i++) {
             if (direction == 'horizontal') {
                 startCoord = (x + 1, y)
             } else {
                startCoord = (x, y + 1) 
             }
+            this.board.set(startCoord, ship) 
         }
-        this.board.set(startCoord, ship) 
+
+        this.ships.push(ship);
+        
 
         // placeShip function have no idea if im doing it right or not. too much instantiation?
     }
@@ -43,8 +48,8 @@ class Gameboard {
 
     receiveAttack([x,y]) {
         
-        if (this.board !== this.missedShots) {
-            this.ships[i]
+        if (this.board.has([x, y])) {
+            const ship = this.board.get([x, y])
             ship.hit();
         } else {
             this.missedShots.add([x,y])
@@ -52,11 +57,7 @@ class Gameboard {
     }
 
     allShipSunk() {
-        
-        this.ships.forEach((ship) => {
-            ship.isSunk();
-            return true;
-        })
+        return this.ships.every(ship => ship.isSunk());
     }
 }
 
@@ -70,8 +71,7 @@ class Player {
     }
 
    
-    attack(oppBoard, receiveAttack) {
-        receiveAttack = Gameboard.receiveAttack
+    attack(oppBoard, [x,y]) {
         oppBoard.receiveAttack([x,y])
     }
      
